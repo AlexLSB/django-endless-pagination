@@ -296,6 +296,7 @@ class PaginateNode(template.Node):
         objects = self.objects.resolve(context)
         paginator = self.paginator(
             objects, per_page, first_page=first_page, orphans=settings.ORPHANS)
+        paginator._count = context.get("paginating_objects_count", None)
 
         # Normalize the default page number if a negative one is provided.
         if default_number < 0:
